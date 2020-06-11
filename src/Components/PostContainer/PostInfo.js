@@ -1,4 +1,8 @@
 import React, {useState, useEffect} from "react";
+import Button from './Button'
+import Container from './Container'
+
+
 
 const PostInfo = props => {
 const {explanation, copyright} = props
@@ -6,8 +10,8 @@ const {explanation, copyright} = props
 
 
 const [information , setinformation] = useState(null)
-const [buttoninfo, setbuttoninfo] = useState(null)
 const [copyrightinfo , setcopyrightinfo] = useState(null)
+const [details , setdetails] = useState(null)
 
 
 
@@ -18,31 +22,36 @@ const [copyrightinfo , setcopyrightinfo] = useState(null)
 
 const closeDetails = () => {
   setinformation(null)
-  setbuttoninfo(null)
   setcopyrightinfo (null)
+  setdetails(null)
 }
  
 const openDetails = explanation => {
   setinformation(props.explanation)
-  setbuttoninfo('Closeinfo')
   setcopyrightinfo (`Copyright: ${props.copyright}`)
+  setdetails(
+<Button onClick={() =>  closeDetails(props.explanation)}>
+  Hide Content
+</Button>
+)
 
 }
 
- 
+
+
 
 return (
   <div>
-    <button onClick={() => openDetails(props.explanation)}>
-      More Info 
-    </button>
+    <Button onClick={() => openDetails(props.explanation)}>
+      Learn More
+    </Button>
+    <Container>
     <h4>
-      <div>
       {information} 
     <p>{copyrightinfo}</p> 
-      <button onClick={() => closeDetails(props.explanation)} >{buttoninfo}</button>
-      </div>
+        {details}
       </h4>
+      </Container>
   </div>
 
 )
